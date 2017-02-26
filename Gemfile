@@ -14,3 +14,5 @@ end
 
 # Database Models
 gem 'kagu', git: 'git://github.com/birdfeed/kagu.git'
+
+gem 'foreman', '0.83.0'

@@ -49,6 +49,8 @@ GEM
     envlogic (1.0.3)
       activesupport
     ffi (1.9.17)
+    foreman (0.83.0)
+      thor (~> 0.19.1)
     formatador (0.2.5)
     guard (2.14.1)
       formatador (>= 0.2.4)
@@ -161,6 +163,7 @@ PLATFORMS
 DEPENDENCIES
   activerecord
   activesupport
+  foreman (= 0.83.0)
   guard
   guard-rspec
   guard-rubocop
@@ -169,4 +172,4 @@ DEPENDENCIES
   rubocop (~> 0.47.1)
 
 BUNDLED WITH
-   1.14.3
+   1.14.4

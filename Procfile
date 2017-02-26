@@ -1,0 +1,1 @@
+zookeeper: $ZKSERVER_PATH start-foreground

@@ -9,7 +9,7 @@ Karafka::Loader.new.load(Karafka::App.root)
 class App < Karafka::App
   setup do |config|
     config.kafka.hosts = %w( 127.0.0.1:9092 )
-    config.name = 'example_app'
+    config.name = 'talkbirdy-myna'
     config.redis = {
       url: 'redis://localhost:6379'
     }
@@ -17,6 +17,11 @@ class App < Karafka::App
   end
 
   routes.draw do
+    topic :sample_entry do 
+      group :samples
+      controller Entry::Samples
+    end
+
     # topic :example do
     #   controller ExampleController
     #   interchanger CustomInterchanger
