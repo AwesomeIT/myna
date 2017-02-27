@@ -10,9 +10,12 @@ group :development do
   gem 'guard'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
+  gem 'pry'
 end
 
 # Database Models
 gem 'kagu', git: 'git://github.com/birdfeed/kagu.git'
 
-gem 'foreman', '0.83.0'
+# Speech recognition
+gem 'pocketsphinx-ruby', '0.3.0'
+gem 'aws-sdk', '2.7.15'

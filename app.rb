@@ -1,9 +1,12 @@
+require 'pry'
+require 'active_support/dependencies'
+
 ENV['RACK_ENV'] ||= 'development'
 ENV['KARAFKA_ENV'] ||= ENV['RACK_ENV']
 
 Bundler.require(:default, ENV['KARAFKA_ENV'])
-
 Karafka::Loader.new.load(Karafka::App.root)
+
 
 # App class
 class App < Karafka::App
@@ -21,11 +24,6 @@ class App < Karafka::App
       group :samples
       controller Entry::Samples
     end
-
-    # topic :example do
-    #   controller ExampleController
-    #   interchanger CustomInterchanger
-    # end
   end
 end
 
