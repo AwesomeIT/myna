@@ -4,3 +4,19 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/82d531033ad143fe9954dcd430cdcecc)](https://www.codacy.com/app/birdfeed/myna?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=birdfeed/myna&amp;utm_campaign=Badge_Grade)
 
 Concurrent actors for the [turaco](https://github.com/AwesomeIT/turaco) API, written using Ruby, powered by Kafka.
+
+## Getting Started
+
+### Requirements
+- Some *nix flavor, or at least a Docker container
+- Zookeeper
+- Kafka
+- MRI 2.4.0
+
+### Setup
+- Install `zookeeper` and `kafka` using your operating system's package manager.
+- Edit `Procfile` with appropriate values. 
+- `bundle`, then `bundle exec foreman start` to start Zookeeper and Kafka.
+	- If on OS X, feel free to just `brew services start zookeeper; brew services start kafka;`
+- `bundle exec sidekiq` to start Sidekiq workers (required).
+- `bundle exec karafka s` to start the Karafka server.
