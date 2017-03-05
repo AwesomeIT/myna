@@ -1,12 +1,12 @@
+# frozen_string_literal: true
 require 'aws-sdk'
-require 'singleton'
 
 module Adapters
   class S3
     include Singleton
 
     def self.file_to_buffer(s3_url)
-      self.instance.file_to_buffer(s3_url)
+      instance.file_to_buffer(s3_url)
     end
 
     def file_to_buffer(s3_url)

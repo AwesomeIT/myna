@@ -1,7 +1,4 @@
-require 'active_support'
-require 'active_support/core_ext'
-require 'kagu'
-
+# frozen_string_literal: true
 module Adapters
   extend ActiveSupport::Autoload
 

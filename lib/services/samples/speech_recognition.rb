@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 require 'pocketsphinx-ruby'
 
 module Services
@@ -6,7 +7,7 @@ module Services
       include Singleton
 
       def self.parse_speech(sample_id)
-        self.instance.parse_speech(sample_id)
+        instance.parse_speech(sample_id)
       end
 
       def parse_speech(sample_id)
@@ -25,6 +26,6 @@ module Services
           ::Pocketsphinx::Configuration.default
         )
       end
-    end    
+    end
   end
 end
