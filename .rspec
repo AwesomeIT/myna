@@ -1,2 +1,4 @@
 --color
 --require spec_helper
+--require kagu
+--require kagu/factories

@@ -1,0 +1,17 @@
+AllCops:
+  DisplayCopNames: true
+  Exclude: 
+    - ./config/**/*.rb
+    - ./db/**/*
+    - ./kagu/**/*
+    - ./spec/**/*
+    - ./vendor/**/*
+    - Gemfile
+    - Guardfile
+    - ./*.gemspec
+
+Style/Documentation:
+  Enabled: false
+
+Lint/Debugger:
+  Enabled: false
