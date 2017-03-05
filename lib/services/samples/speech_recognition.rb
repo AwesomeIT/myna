@@ -6,12 +6,12 @@ module Services
     class SpeechRecognition
       include Singleton
 
-      def self.parse_speech(sample_id)
-        instance.parse_speech(sample_id)
+      def self.compute_hypothesis(sample)
+        instance.compute_hypothesis(sample)
       end
 
-      def parse_speech(sample_id)
-        recognizer.decode(fetch_buffer(::Sample.find(sample_id).s3_url))
+      def compute_hypothesis(sample)
+        recognizer.decode(fetch_buffer(sample.s3_url))
         recognizer.hypothesis
       end
 

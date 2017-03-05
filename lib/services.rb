@@ -1,6 +1,7 @@
 # frozen_string_literal: true
-module Services
-  extend ActiveSupport::Autoload
+# # frozen_string_literal: true
+# module Services
+#   extend ActiveSupport::Autoload
 
-  autoload :Samples
-end
+#   autoload :Samples
+# end

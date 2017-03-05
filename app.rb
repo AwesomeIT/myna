@@ -1,11 +1,13 @@
-# frozen_string_literal: true
+# rubocop:disable Style/FrozenStringLiteralComment
 ENV['RACK_ENV'] ||= 'development'
 ENV['KARAFKA_ENV'] ||= ENV['RACK_ENV']
 
 require './lib/includes'
+
 Bundler.require(:default, ENV['KARAFKA_ENV'])
 
 Dir['./lib/**/*.rb'].each(&method(:require))
+
 Karafka::Loader.new.load(Karafka::App.root)
 
 # App class
@@ -20,11 +22,19 @@ class App < Karafka::App
   end
 
   routes.draw do
-    topic :sample_entry do
+    topic :object_created do
+      group :events
+      controller Controllers::Events
+      responder Responders::Events
+    end
+
+    topic :sample_speech_recognition do
       group :samples
-      controller Entry::Samples
+      controller Controllers::Sample::SpeechRecognition
+      # responder Responders::Events
     end
   end
 end
 
 App.boot!
+# rubocop:enable Style/FrozenStringLiteralComment
