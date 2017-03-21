@@ -1,3 +1,11 @@
+# ubuntu is an ancient word for outdated dependencies
+dependencies:
+    pre:
+        - git clone git@github.com:cmusphinx/sphinxbase.git
+        - git clone git@github.com:cmusphinx/pocketsphinx.git
+        - cd sphinxbase; ./autogen.sh; make; sudo make install;
+        - cd pocketsphinx; ./autogen.sh; make clean all; sudo make install;
+
 database:
     override:
         - pwd
