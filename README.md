@@ -7,15 +7,18 @@ Concurrent actors for the [turaco](https://github.com/AwesomeIT/turaco) API, wri
 ## Getting Started
 
 ### Requirements
+
+#### Host machine base configuration
 - Some *nix flavor, or at least a Docker container
 - Zookeeper
 - Kafka
 - MRI 2.4.0
 
+#### Libraries
+- [PocketSphinx](http://cmusphinx.sourceforge.net/wiki/tutorialpocketsphinx)
+	- `apt`, `brew`, and the Arch Linux `aur` has this as a package
+
 ### Setup
 - Install `zookeeper` and `kafka` using your operating system's package manager.
-- Edit `Procfile` with appropriate values. 
-- `bundle`, then `bundle exec foreman start` to start Zookeeper and Kafka.
-	- If on OS X, feel free to just `brew services start zookeeper; brew services start kafka;`
 - `bundle exec sidekiq` to start Sidekiq workers (required).
 - `bundle exec karafka s` to start the Karafka server.
