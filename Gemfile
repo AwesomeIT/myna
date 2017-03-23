@@ -1,10 +1,10 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-gem 'karafka'
 gem 'activerecord'
 gem 'activesupport'
-gem 'rubocop', '~> 0.47.1', require: false
+gem 'karafka'
+gem 'streamio-ffmpeg'
 
 group :development do
   gem 'database_cleaner', '1.5.3'
@@ -13,6 +13,7 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
   gem 'pry'
+  gem 'rubocop', '~> 0.47.1', require: false
 end
 
 # Database Models
