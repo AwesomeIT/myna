@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 require 'pocketsphinx-ruby'
-require 'streamio-ffmeg'
+require 'streamio-ffmpeg'
 
 module Services
   module Samples
@@ -12,38 +12,33 @@ module Services
       end
 
       def compute_hypothesis(sample)
-        prepare_buffer(sample.s3_url)
-        recognizer.decode(wav_tmpfile)
-        recognizer.hypothesis.tap do
-          File.delete(wav_tmpfile)
-          @tf_path = nil
+        with_buffer(sample.s3_url) do |file|
+          recognizer.decode(file)
+          recognizer.hypothesis
         end
       end
 
       private
 
-      attr_reader :tf_path
-
-      def prepare_buffer(s3_url)
+      def with_buffer(s3_url, &_block)
         # Dump the buffer to a temporary file
         tempfile = Tempfile.new('sphinxtemp')
-        tempfile.write(Adapters::S3.file_to_buffer(s3_url))
-        @tf_path = tempfile.path
+        tempfile.write(Adapters::S3.file_to_buffer(s3_url).read)
+        tf_path = tempfile.path
 
         # ffmpeg it into PocketSphinx specs
-        ff = FFMPEG::Movie.new(@tf_path)
-        ff.transcode("#{tf_path}-wv", %w(-ar 1600 -ac 1)
+        ff = FFMPEG::Movie.new(tf_path)
+        ff.transcode("#{tf_path}.wav", %w(-acodec pcm_s16le -ar 16000 -ac 1))
         tempfile.unlink
+
+        # Pass path to the block
+        yield("#{tf_path}.wav").tap { File.delete("#{tf_path}.wav") }
       end
 
       def recognizer
         @recognizer ||= ::Pocketsphinx::Decoder.new(
           ::Pocketsphinx::Configuration.default
         )
-      end
-
-      def wav_tmpfile
-        "#{@tf_path}-wv"
       end
     end
   end
