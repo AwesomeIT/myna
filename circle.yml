@@ -1,6 +1,7 @@
 # ubuntu is an ancient word for outdated dependencies
 dependencies:
   pre:
+      - sudo apt-get update; sudo apt-get install ffmpeg;
       - git clone git@github.com:cmusphinx/sphinxbase.git
       - git clone git@github.com:cmusphinx/pocketsphinx.git
       - cd sphinxbase; ./autogen.sh; make; sudo make install;
