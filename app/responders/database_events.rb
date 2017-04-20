@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 require 'pry'
 module Responders
-  class Events < Base
+  class DatabaseEvents < Base
     # Topics in
     topic :object_created, required: false
 

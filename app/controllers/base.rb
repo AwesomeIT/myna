@@ -10,14 +10,35 @@ module Controllers
         other.class_eval { before_enqueue :ensure_message }
       end
 
-      def check_for_record
-        class_eval { before_enqueue :check_for_record }
+      def ensure_record
+        class_eval { before_enqueue :ensure_record }
+      end
+
+      def ensure_action
+        class_eval { before_enqueue :ensure_action }
       end
     end
 
     private
 
-    def check_for_record
+    def action
+      @action ||= params[:message].fetch(:action, nil)
+    end
+
+    # rubocop:disable Style/DoubleNegation
+    def ensure_action
+      throw(:abort) unless !!action &&
+                           self.class.private_method_defined?(action)
+    end
+    # rubocop:enable Style/DoubleNegation
+
+    def ensure_message
+      throw(:abort) unless params.is_a?(Hash) &&
+                           params.key?(:message) &&
+                           params.fetch(:message).is_a?(Hash)
+    end
+
+    def ensure_record
       return if model_klass || model_klass.exists?(params[:message].fetch(:id))
       throw(:abort)
     end
@@ -27,10 +48,8 @@ module Controllers
         "Kagu::Models::#{params[:message][:type].camelize}".safe_constantize
     end
 
-    def ensure_message
-      throw(:abort) unless params.is_a?(Hash) &&
-                           params.key?(:message) &&
-                           params.fetch(:message).is_a?(Hash)
+    def record
+      @record ||= model_klass.find(params[:message][:id])
     end
   end
 end

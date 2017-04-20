@@ -23,15 +23,20 @@ class App < Karafka::App
 
   routes.draw do
     topic :object_created do
-      group :events
+      group :database_events
       controller Controllers::Events
-      responder Responders::Events
+      responder Responders::DatabaseEvents
     end
 
     topic :sample_speech_recognition do
       group :samples
       controller Controllers::Sample::SpeechRecognition
       # responder Responders::Events
+    end
+
+    topic :es_manage do
+      group :elasticsearch
+      controller Controllers::Elasticsearch::Manage
     end
   end
 end
