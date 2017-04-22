@@ -20,5 +20,5 @@ Concurrent actors for the [turaco](https://github.com/AwesomeIT/turaco) API, wri
 
 ### Setup
 - Install `zookeeper` and `kafka` using your operating system's package manager.
-- `bundle exec sidekiq` to start Sidekiq workers (required).
+- `bundle exec karafka w` to start Sidekiq workers (required).
 - `bundle exec karafka s` to start the Karafka server.

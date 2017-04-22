@@ -12,3 +12,10 @@ database:
   override:
     - git clone https://github.com/awesomeit/kagu kagu
     - cd kagu; bundle; bundle exec rake db:reset; bundle exec rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1;
+
+
+test:
+  pre:
+    - bundle exec rubocop
+  post: 
+    - bundle exec codeclimate-test-reporter

@@ -2,13 +2,12 @@
 module Controllers
   module Sample
     class SpeechRecognition < Base
-      check_for_record
+      ensure_record
 
       def perform_async
-        sample = Sample.find(params[:message][:id])
-        sample.hypothesis =
-          Services::Samples::SpeechRecognition.compute_hypothesis(sample).to_s
-        sample.save
+        record.hypothesis =
+          Services::Samples::SpeechRecognition.compute_hypothesis(record).to_s
+        record.save
       end
     end
   end
