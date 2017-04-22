@@ -9,6 +9,7 @@ AllCops:
     - Gemfile
     - Guardfile
     - ./*.gemspec
+    - ./pocketsphinx/**/*
 
 Style/Documentation:
   Enabled: false
