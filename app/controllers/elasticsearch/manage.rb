@@ -5,7 +5,6 @@ module Controllers
       ensure_action
 
       def perform_async
-        binding.pry
         Services::Elasticsearch::Manage
           .execute_action(
             *[action, record].compact
