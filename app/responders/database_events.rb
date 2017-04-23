@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'pry'
 module Responders
   class DatabaseEvents < Base
     # Topics in

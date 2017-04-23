@@ -1,0 +1,12 @@
+ffmpeg
+https://launchpad.net/~mc3man/+archive/ubuntu/trusty-media/+files/ffmpeg_3.2.2+git~trusty_amd64.deb
+
+cableswig
+libcableswig-dev
+libsphinxbase-dev
+build-essential
+swig
+pulseaudio
+libpulse-dev
+bison
+libtool
