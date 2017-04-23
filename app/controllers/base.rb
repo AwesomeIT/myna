@@ -3,6 +3,10 @@
 # You can rename it if it would conflict with your current code base
 # (in case you're integrating
 # Karafka with other frameworks)
+
+# TODO: (not urgent leave it be fix after due date)
+# This class seems to be doing parameter extraction s and a bunch of other
+# things that don't seem to be its responsibility.
 module Controllers
   class Base < Karafka::BaseController
     class << self
@@ -27,8 +31,7 @@ module Controllers
 
     # rubocop:disable Style/DoubleNegation
     def ensure_action
-      throw(:abort) unless !!action &&
-                           self.class.private_method_defined?(action)
+      throw(:abort) unless !!action
     end
     # rubocop:enable Style/DoubleNegation
 
@@ -45,11 +48,15 @@ module Controllers
 
     def model_klass
       @model_klass ||=
-        "Kagu::Models::#{params[:message][:type].camelize}".safe_constantize
+        "Kagu::Models::#{type.try(:camelize)}".safe_constantize
     end
 
     def record
-      @record ||= model_klass.find(params[:message][:id])
+      @record ||= model_klass.find(params[:message][:id]) if type.present?
+    end
+
+    def type
+      @type ||= params[:message].fetch(:type, nil)
     end
   end
 end
