@@ -13,12 +13,30 @@ Karafka::Loader.new.load(Karafka::App.root)
 # App class
 class App < Karafka::App
   setup do |config|
-    config.kafka.hosts = %w(127.0.0.1:9092)
+    config.kafka.hosts = case ENV['KARAFKA_ENV']
+                         when /production/
+                           ENV['CLOUDKARAFKA_HOSTS'].split(',')
+                         else
+                           %w(127.0.0.1:9092)
+                         end
+
+    config.topic_mapper = TopicMapper.new
+
     config.name = 'talkbirdy-myna'
-    config.redis = {
-      url: 'redis://localhost:6379'
-    }
+    config.redis = { url: case ENV['KARAFKA_ENV']
+                          when /production/
+                            ENV['REDIS_URL']
+                          else
+                            'redis://localhost:6379'
+                          end }
+
     config.inline_mode = false
+
+    if ENV['KARAFKA_ENV'] == 'production'
+      config.kafka.ssl.ca_cert = ENV['CLOUDKARAFKA_CA']
+      config.kafka.ssl.client_cert = ENV['CLOUDKARAFKA_CERT']
+      config.kafka.ssl.client_cert_key = ENV['CLOUDKARAFKA_PKEY']
+    end
   end
 
   routes.draw do
@@ -42,4 +60,3 @@ class App < Karafka::App
 end
 
 App.boot!
-# rubocop:enable Style/FrozenStringLiteralComment

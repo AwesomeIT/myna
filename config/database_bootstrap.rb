@@ -1,6 +1,16 @@
 require 'yaml'
-require 'kagu'
+require 'active_record'
+
+
+connection = if ENV.fetch('KARAFKA_ENV', '').downcase.include?('production')
+  { production: { adapter: 'postgres',
+                  url: ENV['DATABASE_URL'] } }
+else
+  YAML.load(File.open('./config/database.yml'))
+end
 
 ActiveRecord::Base.establish_connection(
-  YAML.load(File.open('./config/database.yml'))[ENV['KARAFKA_ENV']]
+  connection[ENV['KARAFKA_ENV']]
 )
+
+require 'kagu'

@@ -3,7 +3,7 @@ describe Services::Samples::SpeechRecognition do
   let(:hello_sound) { File.open(file_url) }
   let(:sample) { FactoryGirl.create(:sample, s3_url: file_url) }
 
-  context '#compute_hypothesis' do
+  xcontext '#compute_hypothesis' do
     before do
       allow(Adapters::S3).to receive(:file_to_buffer)
         .with(any_args).and_return(hello_sound)

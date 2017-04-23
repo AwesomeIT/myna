@@ -7,7 +7,8 @@ gem 'activerecord'
 gem 'activesupport'
 
 # Kafka MVC
-gem 'karafka'
+gem 'karafka', github: 'mach-kernel/karafka'
+gem 'waterdrop', github: 'mach-kernel/waterdrop'
 
 # ffmpeg for audio gymnastics
 gem 'streamio-ffmpeg'
@@ -30,10 +31,13 @@ group :test do
 end
 
 # Database Models
-gem 'kagu', git: 'git://github.com/birdfeed/kagu.git'
+gem 'kagu', git: 'git://github.com/birdfeed/kagu.git', require: false
 
 # Speech recognition
-gem 'pocketsphinx-ruby', '0.3.0'
+# gem 'pocketsphinx-ruby', '0.3.0'
 
 # AWS
 gem 'aws-sdk', '2.7.15'
+
+# ???
+gem 'pry'
