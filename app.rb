@@ -26,11 +26,6 @@ class App < Karafka::App
   end
 
   routes.draw do
-    topic :pg_sink do
-      group :database
-      controller Controllers::Events
-    end
-
     topic :sample_speech_recognition do
       group :samples
       controller Controllers::Sample::SpeechRecognition
