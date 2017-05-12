@@ -33,7 +33,7 @@ module Controllers
     end
 
     def authorization_key
-      @authorization_key ||= params[:message]&[:authorization_key]
+      @authorization_key ||= params[:message]&.[](:authorization_key)
     end
 
     def ensure_authorized
@@ -57,9 +57,12 @@ module Controllers
       throw(:abort)
     end
 
+    def message
+      @message ||= params.fetch(:message, {})
+    end
+
     def model_klass
-      @model_klass ||=
-        "Kagu::Models::#{type.try(:camelize)}".safe_constantize
+      @model_klass ||= type.safe_constantize
     end
 
     def record

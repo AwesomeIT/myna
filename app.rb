@@ -26,12 +26,6 @@ class App < Karafka::App
   end
 
   routes.draw do
-    topic :object_created do
-      group :database_events
-      controller Controllers::Events
-      responder Responders::DatabaseEvents
-    end
-
     topic :sample_speech_recognition do
       group :samples
       controller Controllers::Sample::SpeechRecognition

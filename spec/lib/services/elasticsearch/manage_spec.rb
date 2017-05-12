@@ -11,6 +11,24 @@ describe Services::Elasticsearch::Manage do
       end
     end
 
+    context '#destroy_record' do
+      let(:arg) { { type: taggable_record.class.name, id: taggable_record.id } }
+      let(:client) { double }
+
+      it 'should invoke the correct es-model method' do
+        expect_any_instance_of(described_class)
+          .to receive(:es_client).and_return(client)
+
+        expect(client).to receive(:delete).with(
+          index: 'kagu-models-experiments',
+          id: taggable_record.id,
+          type: 'experiment'
+        ).and_return(true)
+        
+        described_class.instance.destroy_record(arg)
+      end
+    end
+
     context '#update_all' do 
       it 'should invoke import on all taggables' do
         Tag.taggable_kinds.values.each do |tk|
