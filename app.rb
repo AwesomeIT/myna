@@ -29,7 +29,6 @@ class App < Karafka::App
     topic :pg_sink do
       group :database
       controller Controllers::Events
-      responder Responders::PostgresSink
     end
 
     topic :sample_speech_recognition do
