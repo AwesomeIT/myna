@@ -26,10 +26,10 @@ class App < Karafka::App
   end
 
   routes.draw do
-    topic :object_created do
-      group :database_events
+    topic :pg_sink do
+      group :database
       controller Controllers::Events
-      responder Responders::DatabaseEvents
+      responder Responders::PostgresSink
     end
 
     topic :sample_speech_recognition do

@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 module Responders
-  class DatabaseEvents < Base
+  class PostgresSink < Base
     # Topics in
-    topic :object_created, required: false
+    topic :pg_sink, required: false
 
     # Sample pipeline steps
     topic :sample_speech_recognition, required: false
