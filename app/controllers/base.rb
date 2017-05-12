@@ -57,6 +57,10 @@ module Controllers
       throw(:abort)
     end
 
+    def message
+      @message ||= params.fetch(:message, {})
+    end
+
     def model_klass
       @model_klass ||= type.safe_constantize
     end

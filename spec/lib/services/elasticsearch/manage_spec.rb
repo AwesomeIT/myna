@@ -12,11 +12,20 @@ describe Services::Elasticsearch::Manage do
     end
 
     context '#destroy_record' do
-      it 'should invoke the correct es-model method' do
-        expect(taggable_record.__elasticsearch__)
-          .to receive(:delete_document).and_return(true)
+      let(:arg) { { type: taggable_record.class.name, id: taggable_record.id } }
+      let(:client) { double }
 
-        described_class.instance.destroy_record(taggable_record)
+      it 'should invoke the correct es-model method' do
+        expect_any_instance_of(described_class)
+          .to receive(:es_client).and_return(client)
+
+        expect(client).to receive(:delete).with(
+          index: 'kagu-models-experiments',
+          id: taggable_record.id,
+          type: 'experiment'
+        ).and_return(true)
+        
+        described_class.instance.destroy_record(arg)
       end
     end
 

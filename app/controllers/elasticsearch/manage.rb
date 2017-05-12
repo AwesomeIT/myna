@@ -5,10 +5,16 @@ module Controllers
       ensure_action
 
       def perform_async
-        Services::Elasticsearch::Manage
-          .execute_action(
-            *[action, record].compact
-          ) if Services::Elasticsearch::Manage.method_defined?(action)
+        service_args = case action
+                       when 'destroy_record'
+                         [action, message]
+                       else
+                         [action, record].compact
+                       end
+
+        Services::Elasticsearch::Manage.execute_action(
+          *service_args
+        ) if Services::Elasticsearch::Manage.method_defined?(action)
       end
     end
   end
