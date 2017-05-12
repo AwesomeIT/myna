@@ -11,7 +11,10 @@ module Controllers
   class Base < Karafka::BaseController
     class << self
       def inherited(other)
-        other.class_eval { before_enqueue :ensure_message }
+        other.class_eval do
+          before_enqueue :ensure_authorized
+          before_enqueue :ensure_message
+        end
       end
 
       def ensure_record
@@ -27,6 +30,14 @@ module Controllers
 
     def action
       @action ||= params[:message].fetch(:action, nil)
+    end
+
+    def authorization_key
+      @authorization_key ||= params[:message]&[:authorization_key]
+    end
+
+    def ensure_authorized
+      throw(:abort) unless authorization_key == ENV['KAFKA_SHARED_SECRET']
     end
 
     # rubocop:disable Style/DoubleNegation
