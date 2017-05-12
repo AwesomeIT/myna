@@ -33,7 +33,7 @@ module Controllers
     end
 
     def authorization_key
-      @authorization_key ||= params[:message]&[:authorization_key]
+      @authorization_key ||= params[:message]&.[](:authorization_key)
     end
 
     def ensure_authorized
