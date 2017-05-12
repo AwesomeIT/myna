@@ -58,8 +58,7 @@ module Controllers
     end
 
     def model_klass
-      @model_klass ||=
-        "Kagu::Models::#{type.try(:camelize)}".safe_constantize
+      @model_klass ||= type.safe_constantize
     end
 
     def record
