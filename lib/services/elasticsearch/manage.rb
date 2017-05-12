@@ -13,6 +13,10 @@ module Services
         record.__elasticsearch__.index_document
       end
 
+      def destroy_record(record)
+        record.__elasticsearch__.delete_document
+      end
+
       def update_all
         Tag.taggable_kinds.values.each(&:import)
       end

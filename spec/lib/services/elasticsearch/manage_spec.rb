@@ -11,6 +11,15 @@ describe Services::Elasticsearch::Manage do
       end
     end
 
+    context '#destroy_record' do
+      it 'should invoke the correct es-model method' do
+        expect(taggable_record.__elasticsearch__)
+          .to receive(:delete_document).and_return(true)
+
+        described_class.instance.destroy_record(taggable_record)
+      end
+    end
+
     context '#update_all' do 
       it 'should invoke import on all taggables' do
         Tag.taggable_kinds.values.each do |tk|
