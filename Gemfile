@@ -30,8 +30,14 @@ group :test do
   gem "codeclimate-test-reporter", "~> 1.0.0"
 end
 
-# Database Models
-gem 'kagu', git: 'git://github.com/birdfeed/kagu.git', require: false
+# TalkBirdy standard library
+kagu_cfg = if ENV.key?('KAGU_PATH')
+  { path: ENV['KAGU_PATH'] }
+else
+  { git: 'git://github.com/birdfeed/kagu.git' }
+end
+
+gem 'kagu', kagu_cfg.merge(require: false)
 
 # Speech recognition
 # gem 'pocketsphinx-ruby', '0.3.0'
