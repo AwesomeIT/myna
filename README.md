@@ -1,6 +1,5 @@
 # myna
-[![CircleCI](https://circleci.com/gh/birdfeed/myna.svg?style=shield)](https://circleci.com/gh/birdfeed/myna)
-<a href="https://codeclimate.com/github/AwesomeIT/myna"><img src="https://codeclimate.com/github/AwesomeIT/myna/badges/gpa.svg" /></a>
+[![Code Climate](https://codeclimate.com/github/AwesomeIT/myna.png)](https://codeclimate.com/github/AwesomeIT/myna) ![CircleCI](https://circleci.com/gh/AwesomeIT/myna.svg?style=shield&circle-token=dd811ff05759a2eb2c2b9973dea67664fce6fb90)
 
 Concurrent actors for the [turaco](https://github.com/AwesomeIT/turaco) API, written using Ruby, powered by Kafka.
 
