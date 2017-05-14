@@ -27,17 +27,14 @@ class App < Karafka::App
 
   routes.draw do
     topic :sample_speech_recognition do
-      group :samples
       controller Controllers::Sample::SpeechRecognition
     end
 
     topic :sample_delete_from_s3 do
-      group :samples
       controller Controllers::Sample::DeleteFromS3
     end
 
     topic :es_manage do
-      group :elasticsearch
       controller Controllers::Elasticsearch::Manage
     end
   end
