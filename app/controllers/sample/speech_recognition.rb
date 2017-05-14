@@ -7,9 +7,9 @@ module Controllers
       def perform_async
         record.hypothesis =
           Services::Samples::SpeechRecognition
-            .compute_hypothesis(record)
-            .to_s
-            
+          .compute_hypothesis(record)
+          .to_s
+
         record.save
       end
     end

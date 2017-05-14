@@ -31,7 +31,7 @@ class App < Karafka::App
       controller Controllers::Sample::SpeechRecognition
     end
 
-    topic :sample_delete_from_s3 do 
+    topic :sample_delete_from_s3 do
       group :samples
       controller Controllers::Sample::DeleteFromS3
     end

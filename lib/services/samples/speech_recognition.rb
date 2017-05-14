@@ -7,7 +7,7 @@ module Services
     class SpeechRecognition
       include Singleton
 
-      def self.compute_hypothesis(sample)
+      def self.compute_hypothesis(_sample)
         ''
         # instance.compute_hypothesis(sample)
       end
