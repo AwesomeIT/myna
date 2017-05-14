@@ -7,13 +7,13 @@ module Services
     class SpeechRecognition
       include Singleton
 
-      def self.compute_hypothesis(_sample)
+      def self.compute_hypothesis(sample)
         ''
         # instance.compute_hypothesis(sample)
       end
 
       # def compute_hypothesis(sample)
-      #   with_buffer(sample.s3_url) do |file|
+      #   with_buffer(sample.s3_key) do |file|
       #     recognizer.decode(file)
       #     recognizer.hypothesis
       #   end
@@ -21,10 +21,12 @@ module Services
 
       # private
 
-      # def with_buffer(s3_url, &_block)
+      # def with_buffer(s3_key, &_block)
       #   # Dump the buffer to a temporary file
       #   tempfile = Tempfile.new('sphinxtemp')
-      #   tempfile.write(Adapters::S3.file_to_buffer(s3_url).read)
+      #   tempfile.write(
+      #     Kagu::Adapters::S3.object_by_key(s3_key).get.body.read
+      #   )
       #   tf_path = tempfile.path
 
       #   # ffmpeg it into PocketSphinx specs
