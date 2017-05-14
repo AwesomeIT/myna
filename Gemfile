@@ -7,8 +7,8 @@ gem 'activerecord'
 gem 'activesupport'
 
 # Kafka MVC
-gem 'karafka', github: 'mach-kernel/karafka'
-gem 'waterdrop', github: 'mach-kernel/waterdrop'
+gem 'karafka'
+gem 'waterdrop'
 
 # ffmpeg for audio gymnastics
 gem 'streamio-ffmpeg'
@@ -34,7 +34,7 @@ end
 kagu_cfg = if ENV.key?('KAGU_PATH')
   { path: ENV['KAGU_PATH'] }
 else
-  { git: 'git://github.com/birdfeed/kagu.git' }
+  { git: 'https://github.com/awesomeit/kagu' }
 end
 
 gem 'kagu', kagu_cfg.merge(require: false)
