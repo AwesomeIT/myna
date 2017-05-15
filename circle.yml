@@ -27,4 +27,7 @@ test:
 deployment:
   production:
     branch: dockerize-me-captain
-    commands: heroku container:push worker -a talkbirdy-myna
+    commands:
+      - heroku plugins:install heroku-container-registry
+      - heroku container:login 
+      - heroku container:push worker -a talkbirdy-myna
