@@ -25,7 +25,7 @@ test:
 
 deployment:
   production:
-    branch: master
+    branch: wtf-pls-give-logs
     commands:
       - >
         heroku plugins:install heroku-container-registry;

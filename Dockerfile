@@ -10,11 +10,13 @@ curl zlib1g-dev build-essential
 # Set up our Ruby
 RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
 RUN curl -sSL https://get.rvm.io | bash -s stable --ruby=2.4.0
-RUN git clone https://github.com/awesomeit/myna
+RUN git clone https://github.com/awesomeit/myna -b wtf-pls-give-logs
 
 WORKDIR myna
 
 RUN bash -l -c "gem install bundler"
 RUN bash -l -c "bundle"
+RUN mkdir -p log
+RUN touch log/production.log
 
 CMD bash -l -c "bundle exec karafka w && bundle exec karafka s"
