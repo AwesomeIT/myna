@@ -161,6 +161,8 @@ GEM
     parser (2.4.0.0)
       ast (~> 2.2)
     pg (0.20.0)
+    pocketsphinx-ruby (0.3.0)
+      ffi (>= 1.9)
     powerpack (0.1.1)
     pry (0.10.4)
       coderay (~> 1.1.0)
@@ -266,6 +268,7 @@ DEPENDENCIES
   guard-rubocop
   kagu!
   karafka
+  pocketsphinx-ruby (= 0.3.0)
   pry
   pry-byebug
   rubocop (~> 0.47.1)
