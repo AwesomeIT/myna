@@ -1,3 +1,7 @@
+machine:
+  services:
+    - docker
+
 # ubuntu is an ancient word for outdated dependencies
 dependencies:
   pre:
@@ -19,3 +23,8 @@ test:
     - bundle exec rubocop
   post: 
     - bundle exec codeclimate-test-reporter
+
+deployment:
+  production:
+    branch: dockerize-me-captain
+    commands: heroku container:push worker -a talkbirdy-myna
