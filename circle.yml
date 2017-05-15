@@ -28,6 +28,6 @@ deployment:
     branch: dockerize-me-captain
     commands:
       - >
-        heroku plugins:install heroku-container-registry
-        docker login --username=_ --password=${NOT_DOCKER_HEROKU_API_KEY} registry.heroku.com
-        heroku container:push worker -a talkbirdy-myna
+        heroku plugins:install heroku-container-registry;
+        docker login --username=_ --password=${NOT_DOCKER_HEROKU_API_KEY} registry.heroku.com;
+        heroku container:push worker -a talkbirdy-myna;
