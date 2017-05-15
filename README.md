@@ -4,6 +4,7 @@
 Concurrent actors for the [turaco](https://github.com/AwesomeIT/turaco) API, written using Ruby, powered by Kafka.
 
 ## Getting Started
+We recommend you set up the project on your local machine, using `docker-compose` for services like ES, Zookeeper, and Kafka. However, for [deployment](#deployment), we recommend using our `Dockerfile` to ensure a correctly set up environment: our images will always contain the correct native extensions that they use through FFI.
 
 #### Basic Dependencies
 - MRI 2.4.0
@@ -48,6 +49,21 @@ services:
   - To make sure they're running, please `docker ps` as `root`. 
 - `bundle exec karafka w` to start Sidekiq workers (required).
 - `bundle exec karafka s` to start the Karafka server.
+
+## Deploying
+
+To separate concerns in production, we do not recommend you package Kafka, Zookeeper, and Elasticsearch in one container (nor are these intended to be used this way). To build our container, just `docker build -t talkbirdy-myna-image .` in the same directory as the `Dockerfile`. Our CI configuration below illustrates what your CD steps look like for probably every PaaS with basic containerization support.
+
+```yaml
+deployment:
+  production:
+    branch: dockerize-me-captain
+    commands:
+      - heroku plugins:install heroku-container-registry
+      - docker login --username=_ --password=$NOT_DOCKER_HEROKU_API_KEY registry.heroku.com
+      - heroku container:push worker -a talkbirdy-myna
+```
+_OK, fine, that environment variable is totally an API key_.
 
 ## Data flow
 

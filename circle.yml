@@ -1,3 +1,7 @@
+machine:
+  services:
+    - docker
+
 # ubuntu is an ancient word for outdated dependencies
 dependencies:
   pre:
@@ -13,9 +17,17 @@ database:
     - git clone https://github.com/awesomeit/kagu kagu
     - cd kagu; bundle; bundle exec rake db:reset; bundle exec rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1;
 
-
 test:
   pre:
     - bundle exec rubocop
   post: 
     - bundle exec codeclimate-test-reporter
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - >
+        heroku plugins:install heroku-container-registry;
+        docker login --email=_ --username=_ --password=${NOT_DOCKER_HEROKU_API_KEY} registry.heroku.com;
+        heroku container:push worker -a talkbirdy-myna;

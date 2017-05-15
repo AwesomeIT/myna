@@ -40,7 +40,7 @@ end
 gem 'kagu', kagu_cfg.merge(require: false)
 
 # Speech recognition
-# gem 'pocketsphinx-ruby', '0.3.0'
+gem 'pocketsphinx-ruby', '0.3.0'
 
 # AWS
 gem 'aws-sdk', '2.7.15'
