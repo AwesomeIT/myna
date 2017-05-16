@@ -9,17 +9,6 @@ Bundler.require(:default, ENV['KARAFKA_ENV'])
 Dir['./lib/**/*.rb'].each(&method(:require))
 Karafka::Loader.new.load(Karafka::App.root)
 
-class Karafka::Logger
-  # Map containing informations about log level for given environment
-  ENV_MAP = {
-    'production' => ::Logger::INFO,
-    'test' => ::Logger::INFO,
-    'development' => ::Logger::INFO,
-    'debug' => ::Logger::INFO,
-    default: ::Logger::INFO
-  }.freeze
-end
-
 # App class
 class App < Karafka::App
   setup do |config|

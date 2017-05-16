@@ -15,7 +15,7 @@ dependencies:
 database:
   override:
     - git clone https://github.com/awesomeit/kagu kagu
-    - cd kagu; bundle; bundle exec rake db:reset; bundle exec rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1;
+    - cd kagu; bundle; bundle exec rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1;
 
 test:
   pre:
@@ -25,7 +25,7 @@ test:
 
 deployment:
   production:
-    branch: wtf-pls-give-logs
+    branch: master
     commands:
       - >
         heroku plugins:install heroku-container-registry;
