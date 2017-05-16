@@ -47,3 +47,5 @@ gem 'aws-sdk', '2.7.15'
 
 # ???
 gem 'pry'
+
+gem 'foreman'
