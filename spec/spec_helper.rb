@@ -16,7 +16,12 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'karafka'
+
 ENV['KARAFKA_ENV'] ||= 'test'
+
+Dir['./app/**/*.rb'].each(&method(:require))
+
 require './lib/includes'
 Dir['./lib/**/*.rb'].each(&method(:require))
 
