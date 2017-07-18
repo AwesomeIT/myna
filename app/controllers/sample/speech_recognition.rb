@@ -11,7 +11,7 @@ module Controllers
           .to_s
 
         record.save
-        
+
         Kagu::Events::PostgresProducer.call(record)
       end
     end
