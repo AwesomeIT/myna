@@ -16,9 +16,15 @@
 # users commonly want.
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
+require 'karafka'
+
 ENV['KARAFKA_ENV'] ||= 'test'
+
+# Directories to hot-load
+%w(./app/**/*.rb
+   ./lib/**/*.rb).each { |p| Dir[p].each(&method(:require)) }
+
 require './lib/includes'
-Dir['./lib/**/*.rb'].each(&method(:require))
 
 # CodeClimate coverage
 require "simplecov"
