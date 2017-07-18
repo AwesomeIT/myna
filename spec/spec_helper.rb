@@ -20,10 +20,11 @@ require 'karafka'
 
 ENV['KARAFKA_ENV'] ||= 'test'
 
-Dir['./app/**/*.rb'].each(&method(:require))
+# Directories to hot-load
+%w(./app/**/*.rb
+   ./lib/**/*.rb).each { |p| Dir[p].each(&method(:require)) }
 
 require './lib/includes'
-Dir['./lib/**/*.rb'].each(&method(:require))
 
 # CodeClimate coverage
 require "simplecov"
