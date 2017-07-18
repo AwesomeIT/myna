@@ -40,11 +40,9 @@ module Controllers
       throw(:abort) unless authorization_key == ENV['KAFKA_SHARED_SECRET']
     end
 
-    # rubocop:disable Style/DoubleNegation
     def ensure_action
-      throw(:abort) unless !!action
+      throw(:abort) if action.nil?
     end
-    # rubocop:enable Style/DoubleNegation
 
     def ensure_message
       throw(:abort) unless params.is_a?(Hash) &&
