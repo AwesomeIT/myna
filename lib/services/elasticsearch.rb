@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 module Services
-  module Samples
+  module Elasticsearch
     extend ActiveSupport::Autoload
 
-    autoload :SpeechRecognition
+    autoload :Manage
   end
 end

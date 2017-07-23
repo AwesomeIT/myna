@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-# # frozen_string_literal: true
-# module Services
-#   extend ActiveSupport::Autoload
+module Services
+  extend ActiveSupport::Autoload
 
-#   autoload :Samples
-# end
+  autoload :Elasticsearch
+  autoload :Samples
+end
