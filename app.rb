@@ -3,7 +3,6 @@
 ENV['RACK_ENV'] ||= 'development'
 ENV['KARAFKA_ENV'] ||= ENV['RACK_ENV']
 
-
 require 'active_support'
 require 'active_support/core_ext'
 require 'singleton'
@@ -12,13 +11,13 @@ require './config/database_bootstrap'
 
 Bundler.require(:default, ENV['KARAFKA_ENV'])
 
-# Dir['./lib/**/*.rb'].each(&method(:require))
+Dir['./lib/**/*.rb'].each(&method(:require))
 Karafka::Loader.new.load(Karafka::App.root)
 
 # App class
 class App < Karafka::App
   setup do |config|
-    config.kafka.hosts = ENV['KAFKA_HOSTS'].split(',')
+    config.kafka.hosts = ENV.fetch('KAFKA_HOSTS', '').split(',')
 
     config.name = 'talkbirdy-myna'
     config.redis = { url: case ENV['KARAFKA_ENV']

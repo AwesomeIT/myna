@@ -2,5 +2,6 @@
 module Services
   extend ActiveSupport::Autoload
 
+  autoload :Elasticsearch
   autoload :Samples
 end
