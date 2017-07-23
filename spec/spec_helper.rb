@@ -20,11 +20,16 @@ require 'karafka'
 
 ENV['KARAFKA_ENV'] ||= 'test'
 
+require 'active_support'
+require 'active_support/core_ext'
+
+require_relative '../config/database_bootstrap'
+
+
 # Directories to hot-load
 %w(./app/**/*.rb
    ./lib/**/*.rb).each { |p| Dir[p].each(&method(:require)) }
 
-require './lib/includes'
 
 # CodeClimate coverage
 require "simplecov"

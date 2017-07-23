@@ -1,12 +1,18 @@
 # rubocop:disable Style/FrozenStringLiteralComment
+
 ENV['RACK_ENV'] ||= 'development'
 ENV['KARAFKA_ENV'] ||= ENV['RACK_ENV']
 
-require './lib/includes'
+
+require 'active_support'
+require 'active_support/core_ext'
+require 'singleton'
+
+require './config/database_bootstrap'
 
 Bundler.require(:default, ENV['KARAFKA_ENV'])
 
-Dir['./lib/**/*.rb'].each(&method(:require))
+# Dir['./lib/**/*.rb'].each(&method(:require))
 Karafka::Loader.new.load(Karafka::App.root)
 
 # App class
@@ -41,3 +47,5 @@ class App < Karafka::App
 end
 
 App.boot!
+
+# rubocop:enable Style/FrozenStringLiteralComment
