@@ -1,34 +1,39 @@
-machine:
-  services:
-    - docker
-
-# ubuntu is an ancient word for outdated dependencies
-dependencies:
-  pre:
-      - sudo add-apt-repository ppa:mc3man/trusty-media -y;
-      - sudo apt-get update; sudo apt-get install ffmpeg;
-      - git clone git@github.com:cmusphinx/sphinxbase.git
-      - git clone git@github.com:cmusphinx/pocketsphinx.git
-      - cd sphinxbase; ./autogen.sh; make; sudo make install;
-      - cd pocketsphinx; ./autogen.sh; make clean all; sudo make install
-
-database:
-  override:
-    - git clone https://github.com/awesomeit/kagu kagu
-    - cd kagu; bundle; bundle exec rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1;
-
-test:
-  pre:
-    - bundle exec rubocop
-  post: 
-    - bundle exec codeclimate-test-reporter
-
-deployment:
-  production:
-    branch: master
-    commands:
-      - >
-        docker build --no-cache -t registry.heroku.com/talkbirdy-myna/worker .;
-        heroku plugins:install heroku-container-registry;
-        docker login --email=_ --username=_ --password=${NOT_DOCKER_HEROKU_API_KEY} registry.heroku.com;
-        docker push registry.heroku.com/talkbirdy-myna/worker;
+version: 2
+jobs:
+  build:
+    docker: 
+      - image: dstancu/ruby-240-pocketsphinx
+        environment:
+          KARAFKA_ENV: production
+          RAILS_ENV: production
+          DATABASE_URL: postgresql://postgres:@127.0.0.1/talkbirdy_test
+      - image: postgres:9.6.2
+        environment:
+          POSTGRES_USER: postgres
+          POSTGRES_DB: talkbirdy_test
+          POSTGRES_PASSWORD: ""
+    steps:
+      - checkout
+      - run:
+          name: Install Bundler
+          command: gem install bundler; bundle install;
+      - run:
+          name: Seed database
+          command: |
+            git clone https://github.com/awesomeit/kagu kagu;
+            cd kagu; bundle; bundle exec rake db:reset DISABLE_DATABASE_ENVIRONMENT_CHECK=1;
+      - run: 
+          name: Rubocop
+          command: bundle exec rubocop
+      - run:
+          name: RSpec
+          command: |
+            bundle exec rspec;
+            bundle exec codeclimate-test-reporter;
+      - setup_remote_docker
+      - run:
+          name: Deploy to Heroku (test)
+          command: |
+            heroku plugins:install heroku-container-registry;
+            docker login --email=_ --username=_ --password=${NOT_DOCKER_HEROKU_API_KEY} registry.heroku.com;
+            heroku container:push worker -a talkbirdy-myna;
