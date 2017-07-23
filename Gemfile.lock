@@ -1,12 +1,4 @@
 GIT
-  remote: git://github.com/mach-kernel/pocketsphinx-ruby.git
-  revision: b88282628c95b5603c1036574abb3d5f3578a5ca
-  branch: sphinxbase-debug-log-level-api-change
-  specs:
-    pocketsphinx-ruby (0.3.1)
-      ffi (>= 1.9)
-
-GIT
   remote: https://github.com/awesomeit/kagu
   revision: 6c65452b91a1a6190ce22dabe9c4950a957e93df
   specs:
@@ -19,6 +11,14 @@ GIT
       karafka
       pg
       rake
+
+GIT
+  remote: https://github.com/mach-kernel/pocketsphinx-ruby.git
+  revision: b88282628c95b5603c1036574abb3d5f3578a5ca
+  branch: sphinxbase-debug-log-level-api-change
+  specs:
+    pocketsphinx-ruby (0.3.1)
+      ffi (>= 1.9)
 
 GEM
   remote: https://rubygems.org/
