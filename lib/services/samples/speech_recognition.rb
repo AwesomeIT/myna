@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-# require 'pocketsphinx-ruby'
+require 'pocketsphinx-ruby'
 require 'streamio-ffmpeg'
 
 module Services

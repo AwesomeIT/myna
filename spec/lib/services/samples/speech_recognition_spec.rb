@@ -5,7 +5,7 @@ describe Services::Samples::SpeechRecognition do
 
   let(:s3_object) { double }
 
-  xcontext '#compute_hypothesis' do
+  context '#compute_hypothesis' do
     before do
       allow(Kagu::Adapters::S3).to receive(:object_by_key)
         .with(file_url).and_return(s3_object)

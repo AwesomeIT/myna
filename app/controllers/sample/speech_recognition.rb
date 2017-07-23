@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 module Controllers
   module Sample
-    class SpeechRecognition < Base
+    class SpeechRecognition < ::Controllers::Base
       ensure_record
 
       def perform_async
