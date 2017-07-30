@@ -6,6 +6,7 @@ ENV['KARAFKA_ENV'] ||= ENV['RACK_ENV']
 require 'active_support'
 require 'active_support/core_ext'
 require 'singleton'
+require 'sentry-raven'
 
 Bundler.require(:default, ENV['KARAFKA_ENV'])
 
@@ -14,6 +15,11 @@ Dir['./lib/**/*.rb'].sort.each(&method(:require))
 require './config/database_bootstrap'
 
 Karafka::Loader.new.load(Karafka::App.root)
+
+# Only spit errors in production
+Raven.configure do |config|
+  config.environments = %w(production)
+end
 
 # App class
 class App < Karafka::App

@@ -49,4 +49,7 @@ gem 'aws-sdk', '2.7.15'
 # ???
 gem 'pry'
 
+# Sentry event alerts
+gem 'sentry-raven'
+
 gem 'foreman'
