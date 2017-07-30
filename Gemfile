@@ -1,7 +1,7 @@
 # encoding: utf-8
 source 'https://rubygems.org'
 
-ruby '2.4.0'
+ruby '2.4.1'
 
 gem 'activerecord'
 gem 'activesupport'
@@ -20,7 +20,8 @@ group :development do
   gem 'guard-rspec', require: false
   gem 'guard-rubocop'
   gem 'pry', require: true
-  gem 'pry-byebug', require: true
+  # TODO: rebuild docker container with libreadline-dev
+  # gem 'pry-byebug', require: true
   gem 'rubocop', '~> 0.47.1', require: false
 end
 

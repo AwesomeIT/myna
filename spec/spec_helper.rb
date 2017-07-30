@@ -19,17 +19,14 @@
 require 'karafka'
 
 ENV['KARAFKA_ENV'] ||= 'test'
+ENV['KAFKA_HOSTS'] ||= 'localhost:9092'
+ENV['REDIS_URL'] ||= 'localhost:6379'
 
 require 'active_support'
 require 'active_support/core_ext'
 
-require_relative '../config/database_bootstrap'
-
-
 # Directories to hot-load
-%w(./app/**/*.rb
-   ./lib/**/*.rb).each { |p| Dir[p].each(&method(:require)) }
-
+require_relative '../app.rb'
 
 # CodeClimate coverage
 require "simplecov"

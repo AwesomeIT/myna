@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 module Services
   module Elasticsearch
-    extend ActiveSupport::Autoload
-
-    autoload :Manage
+    autoload :Manage, './lib/services/elasticsearch/manage'
   end
 end

@@ -59,7 +59,6 @@ GEM
     aws-sigv4 (1.0.1)
     bcrypt (3.1.11)
     builder (3.2.3)
-    byebug (9.0.6)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
@@ -204,9 +203,6 @@ GEM
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
-    pry-byebug (3.4.2)
-      byebug (~> 9.0)
-      pry (~> 0.10)
     rack (2.0.3)
     rack-protection (2.0.0)
       rack
@@ -307,14 +303,13 @@ DEPENDENCIES
   karafka
   pocketsphinx-ruby!
   pry
-  pry-byebug
   rubocop (~> 0.47.1)
   simplecov
   streamio-ffmpeg
   waterdrop
 
 RUBY VERSION
-   ruby 2.4.0p0
+   ruby 2.4.1p111
 
 BUNDLED WITH
    1.15.1

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 module Services
-  extend ActiveSupport::Autoload
-
-  autoload :Elasticsearch
-  autoload :Samples
+  autoload :Elasticsearch, './lib/services/elasticsearch'
+  autoload :Samples, './lib/services/samples'
 end

@@ -7,11 +7,12 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'singleton'
 
-require './config/database_bootstrap'
-
 Bundler.require(:default, ENV['KARAFKA_ENV'])
 
-Dir['./lib/**/*.rb'].each(&method(:require))
+Dir['./app/**/*.rb'].sort.each(&method(:require))
+Dir['./lib/**/*.rb'].sort.each(&method(:require))
+require './config/database_bootstrap'
+
 Karafka::Loader.new.load(Karafka::App.root)
 
 # App class
