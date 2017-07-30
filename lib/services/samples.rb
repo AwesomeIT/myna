@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 module Services
   module Samples
-    extend ActiveSupport::Autoload
-
-    autoload :SpeechRecognition
+    autoload :SpeechRecognition, './lib/services/samples/speech_recognition'
   end
 end
